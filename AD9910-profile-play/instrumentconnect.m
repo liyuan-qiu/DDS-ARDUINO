@@ -1,31 +1,94 @@
-%% 通讯协议
-%输入字符串，字节位
-% byte1 update 128 len = b & 0x1F==0
-%       read   >128,=128+数据长度，b & 0x80第一位为1，同时len = b & 0x1F!=0
-%       write  数据长度，通常是4或8, b & 0x80第一位为0
-%同时byte1的最后五位2进制是用来确定选择哪一个slave片的，用32*i中的i=0,1,2,3来判断
-% byte2 寄存器地址 0~32，常用地址14 （0x0E），是波形参数寄存器
-% byte3~ 数据 
-%      data byte 1 2| 3 4| 5 6 7 8
-%      data byte 1~2 幅值参数14位，最大2^14对应幅值幅值5V，峰峰值10V，输入数据对应（byte1*128+byte2）/2^14 *5V
-%      data byte 3~4 相位参数16位
-%      data byte 5~8 频率参数32位，最大模拟量1GHz，实际模拟输出1GHz*（byte5*256^3+byte6*256^2+byte7*256+byte8)/2^32
+freq_set=[100,110,120,150,200,300,350,400];
+amp_set=rand(1,8);
+phase_set=rand(1,8)*360;
+time_set=[50,20,50,70,80,90,120];
+for i=1:length(freq_set)
+    freq_single=freq_set(i);
+    amp_single=amp_set(i);
+    angle_single=phase_set(i);
+    profile_i=i;
+    write_profile(profile_i,freq_single,amp_single,angle_single)
+end
+play_profile(time_set)
 
+function write_profile(profile_i,freq_single,amp_single,phase_single)
+    profile_register_index=[0x0C,0x0E,0x10,0x12,0x14,0x16,0x18,0x1A];
+    [freq_B1,freq_B2,freq_B3,freq_B4]=encodeFreq(freq_single,SYS_CLK);
+    [amp_B1,amp_B2]=encodeAmp(amp_single,AMP_Max);
+    [phase_B1, phase_B2]=encodePhase(phase_single, max_phase);
+%     fwrite(com,[32*0+8,profile_register_index(profile_i),amp_B1,amp_B2,phase_B1,phase_B2,freq_B1,freq_B2,freq_B3,freq_B4],'uint8');%数据长度8，寄存器地址E，幅值,相位，控制频率fwrite(com,[32*i+8,14,63,255,0,0,66,143,92,40],'uint8');
+    request1=strcat("Single Tone ", num2str(uint8([32*0+8,profile_register_index(profile_i),amp_B1,amp_B2,phase_B1,phase_B2,freq_B1,freq_B2,freq_B3,freq_B4])));
+    fprintf(com,'%s \n',request1);
 
-% Instrument Connection
-
-% Find a serial port object.
-com = instrfind('Type', 'serial', 'Port', 'COM10', 'Tag', '');
-
-% Create the serial port object if it does not exist
-% otherwise use the object that was found.
-if isempty(com)
-    com = serial('COM10');
-else
-    fclose(com);
-    com = com(1);
+end
+function []=read_profile()
+%     fwrite(com,[32*i+136,14],'uint8');
+    request2=strcat("Single Tone ", num2str(uint8([32*i+136,14])));
+    fprintf(com,'%s \n',request2);
+%     read_all=fread(com,8,'uint8');
+    request3=strcat("Single Tone ", num2str(uint8([32*i+136,14])));
+    fread(com,'%s \n');    
+    
 end
 
-% Connect to instrument object, obj1.
-fopen(com); %如果此时串口被其他程序占用，会报错，需要重启单片机
-pause(3);
+function play_profile(time_set)
+% fwrite()
+
+end
+function [freq_B1,freq_B2,freq_B3,freq_B4]=encodeFreq(frequency_set,SYS_CLK)
+
+%         # encode a frequency value in MHz from float to 4 bytes uint8 (32bits)
+%         # DDS frequency range 0 - 1GHz (default)
+%         # actual frequency value is:
+%         #   1GHz *（ byte1 * 256^3 + byte2 * 256^2 + byte3 * 256 + byte4 ) / 2^32  
+%         # max frequency bytes are 255 255 255 255
+    freq_i=min(round(frequency_set/SYS_CLK*2^32),2^32-1);
+    freq_B1=floor(freq_i / 2^24); 
+    freq_i = freq_i - freq_B1 * 2^24;
+    freq_B2 = floor(freq_i / 2^16);
+    freq_i = freq_i - freq_B2 * 2^16;
+    freq_B3 = floor(freq_i / 2^8);
+    freq_i = freq_i - freq_B3 * 2^8;
+    freq_B4 = floor(freq_i);
+
+end
+function [freq_B1,freq_B2,freq_B3,freq_B4]=encodeFreq2(frequency_set,SYS_CLK)
+    reference_CLK=50*10^6;
+    SYS_CLK=10^9;
+    PLL_multiple=round(SYS_CLK/reference_CLK);
+    frequency_set=10*10^6;%设定的frequency大小
+    freq_i=uint32(min(round(frequency_set/SYS_CLK*2^32),2^32-1));
+    freq_B1=bitshift(freq_i,-24);
+    freq_i=uint32(bitshift(freq_i,8));
+    freq_B2=bitshift(freq_i,-24);
+    freq_i=uint32(bitshift(freq_i,8));
+    freq_B3=bitshift(freq_i,-24); 
+    freq_i=uint32(bitshift(freq_i,8));
+    freq_B4=bitshift(freq_i,-24); 
+end
+function [amp_B1,amp_B2]=encodeAmp(AMP_Set,AMP_Max)
+%         # encode a amplitude value from float to 2 bytes uint8 (14bits)
+%         # DDS amplitude range 0 - 1 (default), the max amplitude of each DDS at different frequencies are differnet, so we use a unit value max_amp to represent them
+%         # actual amplitude value is:
+%         #   max_amp *（ byte1 * 256 + byte2 ) / 2^14
+%         # max amplitude bytes are 63 255
+        amp = min(AMP_Set, AMP_Max);
+        amp_i = min(floor(amp / max_amp * 2^14) , 2^14-1);
+        amp_B1 = floor(amp_i / 2^8);
+        amp_i = amp_i - amp_B1 * 2^8;
+        amp_B2 = floor(amp_i);
+end
+function [phase_B1, phase_B2]=encodePhase(phase_set, max_phase)
+%     def __encodePhase(self,phase, max_phase = 360):
+%         # encode a phase value in degree from float to 2 bytes uint8 (16bits)
+%         # DDS phase range 0-360 degree
+%         # actual Amplitude value is:
+%         #   360 *（ byte1 * 256 + byte4 ) / 2^16
+%         # max phase bytes are 255 255
+    max_phase=360
+    phase_i = min(floor(phase / max_phase * 2^16) , 2^16-1);
+    phase_B1 = floor(phase_i / 2^8);
+    phase_i = phase_i - phase_B1 * 2^8;
+    phase_B2 = floor(phase_i);
+
+end
