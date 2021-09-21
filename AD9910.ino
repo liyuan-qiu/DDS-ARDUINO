@@ -31,15 +31,15 @@ void loop() {
     {
       Serial.println(request);//打印request数据
       if (request.indexOf("Single Tone ") >= 0){     
-      M=request.substring(12, 15).toInt();
+      M=request.substring(12, request.indexOf("MHz")).toInt();
       //Serial.println(request.substring(12, 15));
       Serial.println(M);
-      K=request.substring(18,21).toInt();
+      K=request.substring(request.indexOf("MHz")+3,request.indexOf("kHz")).toInt();
       //Serial.println(request.substring(18,21));
       Serial.println(K);
-      H=request.substring(24,27).toInt();
+      H=request.substring(request.indexOf("kHz")+3,request.indexOf("HHz")).toInt();
       Serial.println(H);
-      A=request.substring(30,33).toInt();
+      A=request.substring(request.indexOf("HHz")+3,request.indexOf("dBm")).toInt();
       Serial.println(A);
       SingleProfileFreqOut(M*1000000L + K*1000L + H, A*-1);
       } 
