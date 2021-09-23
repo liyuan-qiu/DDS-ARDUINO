@@ -3,8 +3,8 @@ freq_set=(100:50:500);%MHz
 amp_set=[-30,-15,-30,-15,-30,-15,-30,-15];%dBm
 Profile_set=[0,1,2,3,4,5,6,7];
 
-time_set=ones(1,12)*1000*1000;%delay us
-profile_list=[0,1,2,3,4,3,6,4,3,2];
+time_set=ones(1,100)*(40000);%delay us
+profile_list=[1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1];
 time_length=min([length(profile_list),length(time_set)]);
 if (sum(Profile_set>7)|sum(Profile_set<0)|sum(profile_list>7)|sum(profile_list<0))
     print('Profile should be 0,1,2....7')
@@ -21,6 +21,7 @@ else
         
     end
     request1
+    length(request1)%Arduino Mega buffer size is 64byte, to solve this problem, I will send the order of ms/us to shorten the request1 length
     fprintf(com,'%s\n',request1)
 end
 
