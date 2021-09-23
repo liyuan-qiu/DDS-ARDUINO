@@ -22,6 +22,7 @@ const int IO_UPDATE[4] = {6,6,6,6};
 //Input/Output Update. Digital input (active high). 
 //A high on this pin transfers the contents of the 
 //I/O buffers to the corresponding internal registers.
+const int DDS_Trigger=;//需要分配一个trigger output给DDS用来开始进行play profile
 /*const int SPI_CSB = 9;
 const int MASTER_RESET = 23;
 const int PR0 = 29;
@@ -74,10 +75,9 @@ void setup() {
     pinMode(OSK,OUTPUT);
     //pinMode(PR2,OUTPUT);
     //digitalWrite(PR2,LOW);
-    pinMode(PR2,INPUT);
     pinMode(SPI_SCLK, OUTPUT);
     pinMode(SPI_SDIO, OUTPUT);
-
+    pinMode(DDS_Trigger,OUTPUT);
     digitalWrite(OSK,HIGH);
     digitalWrite(SPI_SCLK, LOW);
       
@@ -85,12 +85,15 @@ void setup() {
       pinMode(MASTER_RESET[i],OUTPUT);
       pinMode(SPI_CSB[i],OUTPUT);
       pinMode(IO_UPDATE[i],OUTPUT);
-      //pinMode(PR0[i],OUTPUT);
-      //pinMode(PR1[i],OUTPUT);
-      //digitalWrite(PR0[i],LOW);
-      //digitalWrite(PR1[i],LOW);
-      pinMode(PR0[i],INPUT);
-      pinMode(PR1[i],INPUT);
+      pinMode(PR0[i],OUTPUT);//PR0,PR1,PR2用来选择profile 0-7
+      pinMode(PR1[i],OUTPUT);
+      pinMode(PR2[i],OUTPUT);
+      digitalWrite(PR0[i],LOW);
+      digitalWrite(PR1[i],LOW);
+      digitalWrite(PR1[i],HIGH);
+//      pinMode(PR0[i],OUTPUT);//PR0,PR1,PR2用来选择profile 0-7
+//      pinMode(PR1[i],OUTPUT);
+//      pinMode(PR2[i],OUTPUT);
 
       digitalWrite(MASTER_RESET[i],HIGH);
       delay(1);
@@ -102,13 +105,47 @@ void setup() {
     } 
 }
 
-byte state = 0, slave = 0, len = 0, pos = 0, data[9];
+String request="";
+
 void loop() {  
+  while(Serial.connected()){
   while (Serial.available()) {
-    byte b = Serial.read();
-    Serial.write(b);//为什么这边需要一个回给电脑的命令
-    
-    if (state == 0) {
+//    byte b = Serial.read();
+    char c = Serial.read();
+    Serial.write(c);//为什么这边需要一个回给电脑的命令
+    if (c == '\n') {
+      break;
+    }
+    requese+=c;
+  }
+    if(request.length()!=0) {
+         if (request.indexOf("Single Tone ") >= 0){
+           myString= request.substring(12, request.indexOf('\n'));
+           String_length=myString.length();
+           myData=getBytes(myString,String_length);
+           write_profile(myData);
+         }
+         else{
+          if(request.indexOf("Load Profile ") >= 0){
+            myString = request.substring(13, request.indexOf('\n'));
+            String_length=myString.length();
+            myData=getBytes(myString,String_length);
+            write_profile(myData);
+          }
+          else{
+            if(request.indexOf("Play Profile ") >= 0){
+            TimeString = request.substring(13, request.indexOf('\n'));
+            String_length=myString.length();              
+          }
+          }
+         }
+    }
+
+}
+}
+void write_profile(byte b){
+  byte state = 0, slave = 0, len = 0, pos = 0, data[9];
+      if (state == 0) {
       slave = (b & 0x60) >> 5;//对应matlab里面32*i，判断是第几个slave，这位运算张翔写的绝了，太厉害了
       len = b & 0x1F;//对应matlab里面32*i+4/8/128/136,4的话对应的事寄存器write，8的话对应的是数据write，128的话对应的是update，136的话对应的是read，因为有三种状态，write/update/read，所以需要两个判断，包括（b & 0x80）来判断是update/read还是write，然后第二个（b & 0x1F）来区分是update或者read
       if (b & 0x80)  {//判断2进制第一位是否为1，即>=128 or1000 0000or 0x80    read or update      
@@ -135,4 +172,7 @@ void loop() {
        }
     }
   }
+
+void profile_play(byte TimeString){
+  digitalWrite(DDS_Trigger,OUTPUT)
 }

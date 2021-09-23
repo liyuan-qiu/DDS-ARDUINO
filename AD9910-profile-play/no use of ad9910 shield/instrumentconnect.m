@@ -13,15 +13,14 @@
 
 
 % Instrument Connection
-clear
 global com;
 % Find a serial port object.
-com = instrfind('Type', 'serial', 'Port', 'COM6', 'Tag', '','baudRate',9600);
+com = instrfind('Type', 'serial', 'Port', 'COM3', 'Tag', '','baudRate',9600);
 
 % Create the serial port object if it does not exist
 % otherwise use the object that was found.
 if isempty(com)
-    com = serial('COM6');
+    com = serial('COM3');
 else
     fclose(com);
     com = com(1);
