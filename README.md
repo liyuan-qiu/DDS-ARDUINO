@@ -27,7 +27,7 @@ The CH2(blue line) is FOUT AM from the output of minicircuit power detector
 
 ### Delay between the DDS_trigger and Profile_0 pin
 CH1(yellow) is DDS_Trigger--arduino Mega A8 pin  
-CH3(pink) is Profile0 
+CH3(pink) is Profile_0 
 CH2(blue) is FOUT AMP  
 
 The delay between CH1 and CH3 is not fix, the delay time is between 9-14us.  
