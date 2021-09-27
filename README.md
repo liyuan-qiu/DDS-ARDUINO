@@ -10,7 +10,7 @@ The CH2(blue line) is FOUT AM from the output of minicircuit power detector
 <img width="400" height="300" src="https://user-images.githubusercontent.com/39110126/134914087-31b6bee1-1f9e-481c-8c7d-2ab932efcbe8.png">
 
 There are two types of time counting
-1. when T_set<16383us the time counting is delayMicroseconds(us)
+1. when T_set<=16383us the time counting is delayMicroseconds(us)
 T_real=1.0202*T_set + 18.516(us)
 The first coefficient maybe from the system clock and the second coefficient maybe from the delay.
 2. When T_set>16383us, the time counting is delay(ms)
