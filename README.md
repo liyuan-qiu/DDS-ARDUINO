@@ -37,13 +37,13 @@ The delay between CH2 and CH3 is smaller than 0.5us
 
 ## Profile switch robustness test
 ### Profile Play with sequence 0,1,2…7
-%在profile里面写入相同频率不同幅度的信号
-freq_set=ones(1,8)*300;%MHz
-amp_set=(-40:5:-5);%dBm
-Profile_set=[0,1,2,3,4,5,6,7];
-%profile按照0,1,2…7顺序来切换
-time_set=ones(1,8)*(400);%delay us
-profile_list=[0,1,2,3,4,5,6,7];
+%在profile里面写入相同频率不同幅度的信号  
+freq_set=ones(1,8)*300;%MHz  
+amp_set=(-40:5:-5);%dBm  
+Profile_set=[0,1,2,3,4,5,6,7];  
+%profile按照0,1,2…7顺序来切换  
+time_set=ones(1,8)*(400);%delay us  
+profile_list=[0,1,2,3,4,5,6,7];  
 The result is shown below  
 
 ![image](https://user-images.githubusercontent.com/39110126/134921803-3157ea84-f5cb-4130-b8ae-c9fed2c416ab.png)
@@ -52,13 +52,13 @@ Result:There is no wrong at 40 times of profile play
 
 
 ### Profile switch 3,4,3,4,3,4,.....
-freq_set=ones(1,8)*300;%MHz
-amp_set=[-40,-40,-40,0,-20,-40,-40,-40];%dBm
-Profile_set=[0,1,2,3,4,5,6,7];
+freq_set=ones(1,8)*300;%MHz  
+amp_set=[-40,-40,-40,0,-20,-40,-40,-40];%dBm  
+Profile_set=[0,1,2,3,4,5,6,7];  
 
 
-time_set=ones(1,20)*(400);%delay us
-profile_list=[3,4,3,4,3,4,3,4,3,4,3,4,3,4,3,4,3,4];
+time_set=ones(1,20)*(400);%delay us  
+profile_list=[3,4,3,4,3,4,3,4,3,4,3,4,3,4,3,4,3,4];  
 
 ![image](https://user-images.githubusercontent.com/39110126/134921404-088cbfb0-b210-4ab5-94f2-ab001602f79c.png)
 
