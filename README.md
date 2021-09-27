@@ -45,7 +45,8 @@ Profile_set=[0,1,2,3,4,5,6,7];
 time_set=ones(1,8)*(400);%delay us
 profile_list=[0,1,2,3,4,5,6,7];
 The result is shown below  
-![image](https://user-images.githubusercontent.com/39110126/134920662-a24fb2f3-56b2-452b-931e-da9bee57f8e9.png)
+
+![image](https://user-images.githubusercontent.com/39110126/134921803-3157ea84-f5cb-4130-b8ae-c9fed2c416ab.png)
 
 Result:There is no wrong at 40 times of profile play
 
