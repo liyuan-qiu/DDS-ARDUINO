@@ -46,7 +46,7 @@ time_set=ones(1,8)*(400);%delay us
 profile_list=[0,1,2,3,4,5,6,7];  
 The result is shown below  
 
-![image](https://user-images.githubusercontent.com/39110126/134921803-3157ea84-f5cb-4130-b8ae-c9fed2c416ab.png)
+<img width="400" height="300" src="https://user-images.githubusercontent.com/39110126/134921803-3157ea84-f5cb-4130-b8ae-c9fed2c416ab.png">
 
 Result:There is no wrong at 40 times of profile play
 
@@ -60,7 +60,7 @@ Profile_set=[0,1,2,3,4,5,6,7];
 time_set=ones(1,20)*(400);%delay us  
 profile_list=[3,4,3,4,3,4,3,4,3,4,3,4,3,4,3,4,3,4];  
 
-![image](https://user-images.githubusercontent.com/39110126/134921404-088cbfb0-b210-4ab5-94f2-ab001602f79c.png)
+<img width="400" height="300" src="https://user-images.githubusercontent.com/39110126/134921404-088cbfb0-b210-4ab5-94f2-ab001602f79c.png">
 
 Result:There is no wrong at 100 times of profile play
 
