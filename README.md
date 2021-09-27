@@ -51,7 +51,6 @@ Result:There is no wrong at 40 times of profile play
 
 
 ### Profile switch 3,4,3,4,3,4,.....
-
 freq_set=ones(1,8)*300;%MHz
 amp_set=[-40,-40,-40,0,-20,-40,-40,-40];%dBm
 Profile_set=[0,1,2,3,4,5,6,7];
@@ -60,5 +59,6 @@ time_set=ones(1,20)*(400);%delay us
 profile_list=[3,4,3,4,3,4,3,4,3,4,3,4,3,4,3,4,3,4];
 
 ![image](https://user-images.githubusercontent.com/39110126/134921404-088cbfb0-b210-4ab5-94f2-ab001602f79c.png)
+
 Result:There is no wrong at 100 times of profile play
 
