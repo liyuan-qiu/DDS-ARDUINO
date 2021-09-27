@@ -5,15 +5,14 @@ The code they share is most about the display and the buttons to manually contro
 ## profile time test: the difference between set profile time and real profile time
 
 The CH1(yellow line) is profile0, arduino mega pin 4
-The CH2(blue line) is RF output AM by output of minicircuit power detector()![image](https://user-images.githubusercontent.com/39110126/134913237-80617bbc-fa4b-42f3-acbb-ba40a499e314.png)
-There are two types of 
-小于16383us，用的是delayMicroseconds(us)
+The CH2(blue line) is RF output AM by output of minicircuit power detector()
+The CH1(yellow line) is profile0, arduino mega pin 4![image](https://user-images.githubusercontent.com/39110126/134913598-fda06707-a702-4f6d-87f2-199caec34964.png)
+There are two types of time counting
+1. when T_set<6383us the time counting is delayMicroseconds(us)
 T_real=1.0202*T_set + 18.516(us)
-第一个系数可能是因为时钟，第二个系数可能是延迟
-====================================================
-大于16383us以后，用的是delay(ms)
+The first coefficient maybe from the system clock and the second coefficient maybe from the delay.
+2. When T_set>16383us, the time counting is delay(ms)
 T_real= 1.0071*T_set + 0.127(ms)
-![image](https://user-images.githubusercontent.com/39110126/134913158-1429cb84-77b1-4e8a-8db5-1a9344d2622a.png)
 
 ## Delay test
 
