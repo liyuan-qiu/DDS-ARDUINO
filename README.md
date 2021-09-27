@@ -5,7 +5,6 @@ The code they share is most about the display and the buttons to manually contro
 ## profile time test: the difference between set profile time and real profile time
 The CH1(yellow line) is profile0, arduino mega pin 4
 The CH2(blue line) is RF output AM by output of minicircuit power detector()![image](https://user-images.githubusercontent.com/39110126/134913237-80617bbc-fa4b-42f3-acbb-ba40a499e314.png)
-
 There are two types of 
 小于16383us，用的是delayMicroseconds(us)
 T_real=1.0202*T_set + 18.516(us)
