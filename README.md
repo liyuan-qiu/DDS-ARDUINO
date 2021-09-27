@@ -33,5 +33,5 @@ Channel2是FOUT信号的AMP
 Channel1和channel3之间的delay在9-14us之间  
 Channel2和channel3之间的delay在小于0.5us，可以忽略不计  
 所以最好用switch控制在15us以后开启RF信号，可以保证有更好的输出  
-![image](https://user-images.githubusercontent.com/39110126/134915860-c5fd5ed2-28d2-4823-9057-b69b65fdd74a.png)
-![image](https://user-images.githubusercontent.com/39110126/134915728-1bdd1d55-d368-44e1-adc8-843bd06bfaaf.png)
+<img width="400" height="300" src="https://user-images.githubusercontent.com/39110126/134915860-c5fd5ed2-28d2-4823-9057-b69b65fdd74a.png">
+<img width="400" height="300" src="https://user-images.githubusercontent.com/39110126/134915728-1bdd1d55-d368-44e1-adc8-843bd06bfaaf.png">
