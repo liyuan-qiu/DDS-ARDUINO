@@ -5,7 +5,8 @@ The code they share is most about the display and the buttons to manually contro
 ## profile time test: the difference between set profile time and real profile time
 
 The CH1(yellow line) is profile0, arduino mega pin 4  
-The CH2(blue line) is FOUT AM from the output of minicircuit power detector
+The CH2(blue line) is FOUT AM from the output of minicircuit power detector  
+
 ![image]<img width="400" height="300" src="https://user-images.githubusercontent.com/39110126/134914087-31b6bee1-1f9e-481c-8c7d-2ab932efcbe8.png">
 
 There are two types of time counting
