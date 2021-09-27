@@ -6,8 +6,8 @@ The code they share is most about the display and the buttons to manually contro
 
 The CH1(yellow line) is profile0, arduino mega pin 4
 The CH2(blue line) is RF output AM by output of minicircuit power detector
+![image](https://user-images.githubusercontent.com/39110126/134914087-31b6bee1-1f9e-481c-8c7d-2ab932efcbe8.png)
 
-![image](https://user-images.githubusercontent.com/39110126/134913598-fda06707-a702-4f6d-87f2-199caec34964.png)
 There are two types of time counting
 1. when T_set<6383us the time counting is delayMicroseconds(us)
 T_real=1.0202*T_set + 18.516(us)
