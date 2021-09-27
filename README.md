@@ -51,7 +51,7 @@ The result is shown below
 Result:There is no wrong at 40 times of profile play
 
 
-### Profile switch 3,4,3,4,3,4,.....
+### Profile Play with sequence 3,4,3,4,3,4,.....
 freq_set=ones(1,8)*300;%MHz  
 amp_set=[-40,-40,-40,0,-20,-40,-40,-40];%dBm  
 Profile_set=[0,1,2,3,4,5,6,7];  
