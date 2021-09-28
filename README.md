@@ -1,7 +1,7 @@
 # DDS-ARDUINO
 The pin is based on the hardware https://github.com/afch/DDS-AD9910-Arduino-Shield.
 But I only use the single tone mode and profile play mode.  
-The profile play mode time sequence is shown below with parameter set in https://github.com/liyuan-qiu/DDS-ARDUINO/blob/AD9910-shield-spi-test-finish/AD9910_with_trigger_direct_finish/AD9910_with_trigger_direct.ino file as  
+The profile play mode time sequence is shown below with parameters set in file https://github.com/liyuan-qiu/DDS-ARDUINO/blob/AD9910-shield-spi-test-finish/AD9910_with_trigger_direct_finish/AD9910_with_trigger_direct.ino as  
 int time_group=5;//the group you want to play  
 long time_play[5]={1546,899,300,675,200};//unit us, the length of time_show should be time_group  
 int profile_play[5]={2,1,3,5,7};// profile_play should be 0,1,2,...,7  
