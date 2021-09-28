@@ -9,7 +9,7 @@ The profile play mode time sequence is shown below with parameters set in file h
 int time_group=5;//the group you want to play  
 long time_play[5]={1546,899,300,675,200};//unit us, the length of time_show should be time_group  
 int profile_play[5]={2,1,3,5,7};// profile_play should be 0,1,2,...,7  
-The red line is the DDS_trigger signal and the blue line is the Profile=[Profile0,Profile1,Profile2] signal.
+The red line is the DDS_trigger signal and the blue line is the Profile=2b[Profile2,Profile1,Profile0] signal.
 <img width="700" src="https://user-images.githubusercontent.com/39110126/135046977-99be4400-4ac6-4044-8541-ec19006e4649.png">
 
 
@@ -17,7 +17,7 @@ The following is the test result of profile play function which don't include th
 
 ## 1.profile time test: the difference between set profile time and real profile time
 
-The CH1(yellow line) is profile0, arduino mega pin 4  
+The CH1(yellow line) is Profile0, arduino mega pin 4  
 The CH2(blue line) is FOUT AM from the output of minicircuit power detector  
 
 <img width="400" height="300" src="https://user-images.githubusercontent.com/39110126/134914087-31b6bee1-1f9e-481c-8c7d-2ab932efcbe8.png">
@@ -31,16 +31,16 @@ T_real= 1.0071*T_set + 0.127(ms)
 
 ## 2.Delay test
 
-### 2.1 Delay between the Profile_0 pin and FOUT
-The FOUT delay from Profile_0 change is smaller than 0.5us.  
+### 2.1 Delay between the Profile0 pin and FOUT
+The FOUT delay from Profile0 change is smaller than 0.5us.  
 The CH1(yellow line) is profile0, arduino mega pin 4  
 The CH2(blue line) is FOUT AM from the output of minicircuit power detector 
 
 ![image](https://user-images.githubusercontent.com/39110126/134915241-a7110b08-5d69-41ec-b0a8-64f3f2b3328a.png)
 
-### 2.2 Delay between the DDS_trigger and Profile_0 pin
+### 2.2 Delay between the DDS_trigger and Profile0 pin
 CH1(yellow) is DDS_Trigger--arduino Mega A8 pin  
-CH3(pink) is Profile_0 
+CH3(pink) is Profile0 
 CH2(blue) is FOUT AMP  
 
 The delay between CH1 and CH3 is not fix, the delay time is between 9-14us.  
