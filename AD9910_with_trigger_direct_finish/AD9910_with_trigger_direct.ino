@@ -12,9 +12,9 @@ const int DDS_trigger= A8;//这个脚用来trigger开始
 int  TriggerState = 0; 
 int  lastTriggerState = 0; 
 bool  Load_time_done=0;// 0 means not finish loading the time sequence, 1 means finish loading the time sequence
-int time_group=10;
-long time_play[10]={500,500,500,500,500,500,500,500,500,500};//unit us, the length of time_show should be time_group
-int profile_play[10]={3,4,3,4,3,4,3,4,3,4};// profile_play should be 0,1,2,...,7
+int time_group=11;//the group you want to play
+long time_play[11]={1546,899,300,675,200,8888,452,3349,1202,500,9685};//unit us, the length of time_show should be time_group
+int profile_play[11]={0,1,3,5,7,6,2,1,0,4,6};// profile_play should be 0,1,2,...,7
 
 void setup() {
   pinMode(DDS_trigger, INPUT);
@@ -34,8 +34,8 @@ void setup() {
   //profile 0,1,2.....7 set with frequency and amplitude
   int profile_length=8;//the max profile length is 8, from 0,1,2,....,7
   uint8_t profile_load[profile_length]={0,1,2,3,4,5,6,7};//profile should be 0,1,2,....,7
-  uint32_t freq_load[profile_length]={300,300,300,300,300,300,300,300};//unit MHz, the max frequency is 600MHz
-  int amp_load[profile_length]={-40,-35,-30,-5,-40,-15,-10,-5};//unit dBm, amplitude should be -84 to 0 dBm
+  uint32_t freq_load[profile_length]={100,150,200,178,600,555,142,78};//unit MHz, the max frequency is 600MHz
+  int amp_load[profile_length]={-33,-58,-28,-5,0,-17,-26,-7};//unit dBm, amplitude should be -84 to 0 dBm
   //time sequence set with time dwell list and profile list
 
   
