@@ -1,6 +1,10 @@
 # DDS-ARDUINO
 The pin is based on the hardware https://github.com/afch/DDS-AD9910-Arduino-Shield.
 But I only use the single tone mode and profile play mode.  
+The AD9910-profile-play-matlab file contains the arduino file and the matlab spi control file, but the profile play function can't be triggered by the DDS_trigger input pin.   
+The AD9910_with_trigger_direct_finish file contains the arduino file which can realize the triggered profile play funtion but the parameters can't be transferred from the SPI port. 
+In fact, I will combine these two files in the future.
+
 The profile play mode time sequence is shown below with parameters set in file https://github.com/liyuan-qiu/DDS-ARDUINO/blob/AD9910-shield-spi-test-finish/AD9910_with_trigger_direct_finish/AD9910_with_trigger_direct.ino as  
 int time_group=5;//the group you want to play  
 long time_play[5]={1546,899,300,675,200};//unit us, the length of time_show should be time_group  
@@ -8,9 +12,6 @@ int profile_play[5]={2,1,3,5,7};// profile_play should be 0,1,2,...,7
 
 <img width="700" src="https://user-images.githubusercontent.com/39110126/135046977-99be4400-4ac6-4044-8541-ec19006e4649.png">
 
-The AD9910-profile-play-matlab file contains the arduino file and the matlab spi control file, but the profile play function can't be triggered by the DDS_trigger input pin.   
-The AD9910_with_trigger_direct_finish file contains the arduino file which can realize the triggered profile play funtion but the parameters can't be transferred from the SPI port. 
-In fact, I will combine these two files in the future.
 
 The following is the test result of profile play function which don't include the frequency noise because the frequency noise had been tested by the developer  https://github.com/afch/DDS-AD9910-Arduino-Shield.
 
