@@ -40,7 +40,8 @@ The delay between CH2 and CH3 is smaller than 0.5us
 <img width="400" height="300" src="https://user-images.githubusercontent.com/39110126/134915860-c5fd5ed2-28d2-4823-9057-b69b65fdd74a.png">
 <img width="400" height="300" src="https://user-images.githubusercontent.com/39110126/134915728-1bdd1d55-d368-44e1-adc8-843bd06bfaaf.png">
 
-## 3.Profile switch robustness test
+## 3.Profile switch robustness test  
+The profile switch bug is reported in the JQI DDS design and the artiq dds design, so I tested the profile switch function in this DDS. The result shows no bug in profile switch process.
 ### 3.1 Profile Play with sequence 0,1,2…7
 %在profile里面写入相同频率不同幅度的信号  
 freq_set=ones(1,8)*300;%MHz  
