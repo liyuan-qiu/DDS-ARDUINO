@@ -5,7 +5,7 @@ The AD9910-profile-play-matlab file contains the arduino file and the matlab spi
 The AD9910_with_trigger_direct_finish file contains the arduino file which can realize the triggered profile play funtion but the parameters can't be transferred from the SPI port. 
 In fact, I will combine these two files in the future.
 ## Profile Play mode
-The profile play mode time sequence is shown below with parameters set in file https://github.com/liyuan-qiu/DDS-ARDUINO/blob/AD9910-shield-spi-test-finish/AD9910_with_trigger_direct_finish/AD9910_with_trigger_direct.ino as  
+The profile play mode time sequence with parameters set in file https://github.com/liyuan-qiu/DDS-ARDUINO/blob/AD9910-shield-spi-test-finish/AD9910_with_trigger_direct_finish/AD9910_with_trigger_direct.ino is shown in the following figure    
 int time_group=5;//the group you want to play  
 long time_play[5]={1546,899,300,675,200};//unit us, the length of time_show should be time_group  
 int profile_play[5]={2,1,3,5,7};// profile_play should be 0,1,2,...,7  
