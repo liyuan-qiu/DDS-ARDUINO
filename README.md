@@ -1,6 +1,9 @@
 # DDS-ARDUINO
 The pin is based on the hardware https://github.com/afch/DDS-AD9910-Arduino-Shield.
 But I only use the single tone mode and profile play mode.  
+The profile play mode time sequence is shown below  
+![time sequence2](https://user-images.githubusercontent.com/39110126/135045163-a58ffdd7-6880-4089-8dea-e3ac9a2d0ddb.png)
+
 The AD9910-profile-play-matlab file contains the arduino file and the matlab spi control file, but the profile play function can't be triggered by the DDS_trigger input pin.   
 The AD9910_with_trigger_direct_finish file contains the arduino file which can realize the triggered profile play funtion but the parameters can't be transferred from the SPI port. 
 In fact, I will combine these two files in the future.
