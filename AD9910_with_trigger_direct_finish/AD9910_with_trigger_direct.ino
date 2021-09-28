@@ -12,9 +12,9 @@ const int DDS_trigger= A8;//这个脚用来trigger开始
 int  TriggerState = 0; 
 int  lastTriggerState = 0; 
 bool  Load_time_done=0;// 0 means not finish loading the time sequence, 1 means finish loading the time sequence
-int time_group=11;//the group you want to play
-long time_play[11]={1546,899,300,675,200,8888,452,3349,1202,500,9685};//unit us, the length of time_show should be time_group
-int profile_play[11]={0,1,3,5,7,6,2,1,0,4,6};// profile_play should be 0,1,2,...,7
+int time_group=5;//the group you want to play  
+long time_play[5]={1546,899,300,675,200};//unit us, the length of time_show should be time_group  
+int profile_play[5]={2,1,3,5,7};// profile_play should be 0,1,2,...,7  
 
 void setup() {
   pinMode(DDS_trigger, INPUT);
