@@ -87,7 +87,7 @@ Result:There is no wrong at 100 times of profile play
 同时出现profile0,1,2三个引脚切换不同时的问题，导致出现第三个态  
 ### 2. digitalWrite&digitalRead换成直接控制    
 FOUT与DDS_trigger之间delay是3.2-6us，但偶尔会到大约9-11us的地方，不是很robust  
-![image](https://user-images.githubusercontent.com/39110126/135264455-dff6cf78-966b-4509-8c16-42de41568a71.png)  
+<img width="400" height="300" src="https://user-images.githubusercontent.com/39110126/135264455-dff6cf78-966b-4509-8c16-42de41568a71.png">  
 
 ### 3. digitalWrite换成直接控制，digitalRead()继续使用  
 FOUT与DDS_trigger之间delay是2.8-8us  
