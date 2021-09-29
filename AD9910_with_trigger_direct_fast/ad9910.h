@@ -330,8 +330,8 @@ pin indicates new data for transmission. In continuous mode, this pin remains hi
 #define Zero_crossing 			0x08
 //*********
 
-extern void DDS_Fout (uint32_t *F_OUT, int16_t ASF_Val, uint8_t Num_Prof);
-extern void SingleProfileFreqOut(uint32_t freq_output, int16_t amplitude_dB_output);
+extern void DDS_Fout (uint32_t *F_OUT, int16_t Amplitude_dB, uint16_t Phase, uint8_t Num_Prof);
+extern void SingleProfileFreqOut(uint32_t freq_output, int16_t amplitude_dB_output, uint16_t Phase);
 //extern void profile_single_tone(uint8_t Num_Prof);
 extern void profile_single_tone_DIRECT(uint8_t Num_Prof);
 extern void DDS_Init(bool PLL, bool Divider, uint32_t Ref_Clk);
