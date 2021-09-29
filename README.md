@@ -1,9 +1,9 @@
 # DDS-ARDUINO
 The pin is based on the hardware https://github.com/afch/DDS-AD9910-Arduino-Shield.
 But I only use the single tone mode and profile play mode.  
-The AD9910-profile-play-matlab file (https://github.com/liyuan-qiu/DDS-ARDUINO/tree/AD9910-shield-spi-test-finish/AD9910-profile-play-matlab) contains the arduino file and the matlab spi control file, but the profile play function can't be triggered by the DDS_trigger input pin.   
-The AD9910_with_trigger_direct_finish file(https://github.com/liyuan-qiu/DDS-ARDUINO/tree/AD9910-shield-spi-test-finish/AD9910_with_trigger_direct_finish) contains the arduino file which can realize the triggered profile play funtion but the parameters can't be transferred from the SPI port.  
-The fast verstion(https://github.com/liyuan-qiu/DDS-ARDUINO/tree/AD9910-shield-spi-test-finish/AD9910_with_trigger_direct_fast) has improved the DDS_trigger response time as shown in Section:DigitalWrite&DigitalRead different function. 
+1. The AD9910-profile-play-matlab file (https://github.com/liyuan-qiu/DDS-ARDUINO/tree/AD9910-shield-spi-test-finish/AD9910-profile-play-matlab) contains the arduino file and the matlab spi control file, but the profile play function can't be triggered by the DDS_trigger input pin.   
+2. The AD9910_with_trigger_direct_finish file(https://github.com/liyuan-qiu/DDS-ARDUINO/tree/AD9910-shield-spi-test-finish/AD9910_with_trigger_direct_finish) contains the arduino file which can realize the triggered profile play funtion but the parameters can't be transferred from the SPI port.  
+3. The fast verstion(https://github.com/liyuan-qiu/DDS-ARDUINO/tree/AD9910-shield-spi-test-finish/AD9910_with_trigger_direct_fast) has improved the DDS_trigger response time as shown in Section:DigitalWrite&DigitalRead different function. 
 
 In fact, I will combine these two files in the future.
 ## Profile Play mode
@@ -81,11 +81,13 @@ profile_list=[3,4,3,4,3,4,3,4,3,4,3,4,3,4,3,4,3,4];
 Result:There is no wrong at 100 times of profile play
 
 ## DigitalWrite&DigitalRead different function
-### 1. 全部用digitalWrite&digitalRead   
+### 1. 全部用digitalWrite&digitalRead 
+(https://github.com/liyuan-qiu/DDS-ARDUINO/tree/AD9910-shield-spi-test-finish/AD9910_with_trigger_direct_finish)
 用FOUT与DDS_trigger之间的delay时间在9-14us之间   
 ![image](https://user-images.githubusercontent.com/39110126/135261837-ebf8eabc-d4ad-4567-a970-e15ef766e13b.png)  
 同时出现profile0,1,2三个引脚切换不同时的问题，导致出现第三个态  
-### 2. digitalWrite&digitalRead换成直接控制    
+### 2. digitalWrite&digitalRead换成直接控制  
+(https://github.com/liyuan-qiu/DDS-ARDUINO/tree/AD9910-shield-spi-test-finish/AD9910_with_trigger_direct_fast)
 FOUT与DDS_trigger之间delay是3.2-6us，但偶尔会到大约9-11us的地方，不是很robust  
 <img width="400" height="300" src="https://user-images.githubusercontent.com/39110126/135264455-dff6cf78-966b-4509-8c16-42de41568a71.png">  
 
