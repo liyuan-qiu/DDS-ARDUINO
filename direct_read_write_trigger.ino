@@ -57,3 +57,9 @@ void profile_single_tone_DIRECT(uint8_t Num_Prof){
     else PORTE &= ~(1 << PORTE4);
 
 }
+//DDS_trigger=A8 pin,DDS_PROFILE_0_PIN=4,DIGITAL READ AND DIGITAL WRITE,delay7.4-12us
+
+//DDS_trigger=19 pin,DDS_PROFILE_0_PIN=4,DIGITAL READ AND DIGITAL WRITE,delay7.4-12us
+
+//DDS_trigger=A8 pin,DDS_PROFILE_0_PIN=4,完全是直接操作，delay 1.2-3us
+//DDS_trigger=19 pin,DDS_PROFILE_0_PIN=4,完全是直接操作，delay 1.2-3us
