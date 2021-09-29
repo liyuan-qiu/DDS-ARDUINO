@@ -81,11 +81,12 @@ Result:There is no wrong at 100 times of profile play
 ##DigitalWrite&DigitalRead different function
 	1. 全部用digitalWrite&digitalRead  
 	delay时间在9-14us之间  
-  ![image](https://user-images.githubusercontent.com/39110126/135235049-cf454f5e-7778-4469-8145-0801b32ef7cb.png)
+  	![image](https://user-images.githubusercontent.com/39110126/135261837-ebf8eabc-d4ad-4567-a970-e15ef766e13b.png)
 	同时出现profile0,1,2三个引脚切换不同时的问题，导致出现第三个态
 	2. digitalWrite&digitalRead换成直接控制
-用FOUT实测
-FOUT与DDS_trigger之间delay是3.2-6us，但偶尔会到大约9-11us的地方，不是很robust
+	用FOUT实测
+	FOUT与DDS_trigger之间delay是3.2-6us，但偶尔会到大约9-11us的地方，不是很robust
 	3. digitalWrite换成直接控制，digitalRead()继续使用
 	FOUT与DDS_trigger之间delay是2.8-8us
-偶尔到11us
+	偶尔到11us
+如果对于切换profile时间要求很高的话，可以将profile0,1,2三个引脚换成FPGA直接控制，arduino Mega只是作为load register所用
