@@ -2,10 +2,9 @@
 The pin is based on the hardware https://github.com/afch/DDS-AD9910-Arduino-Shield.
 But I only use the single tone mode and profile play mode.  
 1. The AD9910-profile-play-matlab file (https://github.com/liyuan-qiu/DDS-ARDUINO/tree/AD9910-shield-spi-test-finish/AD9910-profile-play-matlab) contains the arduino file and the matlab spi control file, but the profile play function can't be triggered by the DDS_trigger input pin.   
-2. The AD9910_with_trigger_direct_finish file(https://github.com/liyuan-qiu/DDS-ARDUINO/tree/AD9910-shield-spi-test-finish/AD9910_with_trigger_direct_finish) contains the arduino file which can realize the triggered profile play funtion but the parameters can't be transferred from the SPI port.  
+2. The AD9910_with_trigger_direct_finish file(https://github.com/liyuan-qiu/DDS-ARDUINO/tree/AD9910-shield-spi-test-finish/AD9910_with_trigger_direct_finish) contains the arduino file which can realize the triggered profile play funtion but the parameters can't be transferred from the SPI port. In fact, I will combine these two files in the future. 
 3. The fast verstion(https://github.com/liyuan-qiu/DDS-ARDUINO/tree/AD9910-shield-spi-test-finish/AD9910_with_trigger_direct_fast) has improved the DDS_trigger response time as shown in Section:DigitalWrite&DigitalRead different function. 
 
-In fact, I will combine these two files in the future.
 ## Profile Play mode
 The profile play mode time sequence with parameters set in file https://github.com/liyuan-qiu/DDS-ARDUINO/blob/AD9910-shield-spi-test-finish/AD9910_with_trigger_direct_finish/AD9910_with_trigger_direct.ino is shown in the following figure    
 int time_group=5;//the group you want to play  
