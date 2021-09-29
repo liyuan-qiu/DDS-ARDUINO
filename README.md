@@ -3,7 +3,7 @@ The pin is based on the hardware https://github.com/afch/DDS-AD9910-Arduino-Shie
 But I only use the single tone mode and profile play mode.  
 The AD9910-profile-play-matlab file (https://github.com/liyuan-qiu/DDS-ARDUINO/tree/AD9910-shield-spi-test-finish/AD9910-profile-play-matlab) contains the arduino file and the matlab spi control file, but the profile play function can't be triggered by the DDS_trigger input pin.   
 The AD9910_with_trigger_direct_finish file(https://github.com/liyuan-qiu/DDS-ARDUINO/tree/AD9910-shield-spi-test-finish/AD9910_with_trigger_direct_finish) contains the arduino file which can realize the triggered profile play funtion but the parameters can't be transferred from the SPI port.  
-The fast verstion has improved the DDS_trigger response time. 
+The fast verstion(https://github.com/liyuan-qiu/DDS-ARDUINO/tree/AD9910-shield-spi-test-finish/AD9910_with_trigger_direct_fast) has improved the DDS_trigger response time as shown in Section:DigitalWrite&DigitalRead different function. 
 
 In fact, I will combine these two files in the future.
 ## Profile Play mode
