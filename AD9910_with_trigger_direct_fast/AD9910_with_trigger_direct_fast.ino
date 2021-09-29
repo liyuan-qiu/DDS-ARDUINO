@@ -35,24 +35,27 @@ void setup() {
   //single tone frequency, amplitude and phase 
   uint32_t singe_freq=150;//unit MHz, the max frequency is 600MHz
   int single_amp=-40;//unit dBm, amplitude should be -84 to 0 dBm
+  uint16_t single_phase=0;// phase between 0-360
   //profile 0,1,2.....7 set with frequency and amplitude
   int profile_length=8;//the max profile length is 8, from 0,1,2,....,7
   uint8_t profile_load[profile_length]={0,1,2,3,4,5,6,7};//profile should be 0,1,2,....,7
   uint32_t freq_load[profile_length]={300,300,300,300,300,300,300,300};//unit MHz, the max frequency is 600MHz
   int amp_load[profile_length]={-40,-35,-30,-25,-20,-15,-10,-5};//unit dBm, amplitude should be -84 to 0 dBm
+  uint16_t Phase_load[profile_length]={0,0,0,0,0,0,0,0};//phase between 0-360
   //uint32_t freq_load[profile_length]={100,150,200,250,300,350,400,450};//unit MHz, the max frequency is 600MHz
   //int amp_load[profile_length]={-40,-35,-30,-5,-40,-15,-10,-5};//unit dBm, amplitude should be -84 to 0 dBm
   
 
   if (!Mode_set){//single mode 
-    SingleProfileFreqOut(singe_freq*1000000L, single_amp);
+    SingleProfileFreqOut(singe_freq*1000000L, single_amp, single_phase);
   }else{// profile play
     //first step is loading the profile
     for(int j=0;j<profile_length;j++){
       uint32_t F1=freq_load[j]*1000000L;//the unit Hz
       int A1=amp_load[j];
       uint8_t Prof1=profile_load[j];
-      DDS_Fout(&F1,A1,Prof1+Single_Tone_Profile_0);
+      uint16_t Phase1=Phase_load[j];
+      DDS_Fout(&F1,A1,Phase1,Prof1+Single_Tone_Profile_0);
     }
      Load_time_done=1;//确定已经load结束 
      Serial.println("finish the profile load");     
