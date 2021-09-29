@@ -143,7 +143,7 @@ void DDS_UPDATE(void)
    Num_Prof - Single Tone Mode 0..7
    Amplitude_dB - amplitude in dB from 0 to -84 (only negative values)
 *****************************************************************************************/
-void DDS_Fout (uint32_t *F_OUT, int16_t Amplitude_dB, uint8_t Num_Prof)
+void DDS_Fout (uint32_t *F_OUT, int16_t Amplitude_dB, uint16_t Phase, uint8_t Num_Prof)
 {
    uint32_t RealDDSCoreClock=CalcRealDDSCoreClockFromOffset();
    //FTW = ((uint32_t)(4294967296.0 *((float)*F_OUT / (float)DDS_Core_Clock)));
@@ -180,9 +180,10 @@ void DDS_Fout (uint32_t *F_OUT, int16_t Amplitude_dB, uint8_t Num_Prof)
    //ASF  - Amplitude 14bit 0...16127
 	 strBuffer[1] =  (uint16_t)powf(10,(Amplitude_dB+84.288)/20.0) >> 8;     
 	 strBuffer[2] =  (uint16_t)powf(10,(Amplitude_dB+84.288)/20.0);         
-	 strBuffer[3] = 0x00;
-	 strBuffer[4] = 0x00;
-
+	 //strBuffer[3] = 0x00;
+	 //strBuffer[4] = 0x00;
+   strBuffer[3] = (uint16_t)(Phase*65536/360)>>8;
+   strBuffer[4] = (uint16_t)(Phase*65536/360);
 	 strBuffer[5] = *(((uint8_t*)jlob)+ 3);
 	 strBuffer[6] = *(((uint8_t*)jlob)+ 2);
 	 strBuffer[7] = *(((uint8_t*)jlob)+ 1);
@@ -711,7 +712,7 @@ void DDS_Init(bool PLL, bool Divider, uint32_t Ref_Clk)
  * Freq Out, freq_output in Hz 0 HZ - 450MHZ, 
  * amplitude_dB_output - from 0 to -84 (negative)
  ************************************************************************/
-void SingleProfileFreqOut(uint32_t freq_output, int16_t amplitude_dB_output) 
+void SingleProfileFreqOut(uint32_t freq_output, int16_t amplitude_dB_output, uint16_t Phase) 
 {
   #if DBG==1
   Serial.println(F("****SingleProfileFreqOut***"));
@@ -742,7 +743,7 @@ void SingleProfileFreqOut(uint32_t freq_output, int16_t amplitude_dB_output)
   HAL_GPIO_WritePin(DDS_SPI_CS_GPIO_PORT, DDS_SPI_CS_PIN, GPIO_PIN_SET);  
   DDS_UPDATE();
   
-  DDS_Fout(&freq_output, amplitude_dB_output, Single_Tone_Profile_0);
+  DDS_Fout(&freq_output, amplitude_dB_output,Phase,Single_Tone_Profile_0);
 //  DDS_Fout(&freq_output, amplitude_dB_output, Single_Tone_Profile_1);
 //  DDS_Fout(&freq_output, amplitude_dB_output, Single_Tone_Profile_2);
 //  DDS_Fout(&freq_output, amplitude_dB_output, Single_Tone_Profile_2);
