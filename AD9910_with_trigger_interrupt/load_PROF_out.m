@@ -1,7 +1,7 @@
-function load_PROF_out(freq_set,amp_set,prof_num)
+function load_PROF_out(freq_set,amp_set,Phase_set,prof_num)
 % from ad9910.cpp void DDS_Fout (uint32_t *F_OUT, int16_t Amplitude_dB, uint8_t Num_Prof)
 global com;
-request1=['Profile Load ',num2str(freq_set),'Hz',num2str(amp_set),'dBm',num2str(prof_num,'%01d'),'prof_set']
+request1=['Profile Load ',num2str(freq_set),'Hz',num2str(amp_set),'dBm',num2str(Phase_set,'%03d'),'Deg',num2str(prof_num,'%01d'),'prof_set']
 if (freq_set>600*10^6)
     print('frequency is larger than 600MHz\n')
 else
@@ -17,3 +17,4 @@ else
 end
 
 end
+
