@@ -1,6 +1,7 @@
 global com;
 freq_set=(100:50:400);%MHz
 amp_set=ones(1,8)*(-20);%dBm
+Phase_set=ones(1,8)*(0);%degree
 Profile_set=[0,1,2,3,4,5,6,7];
 
 time_set=ones(1,4)*(1*10^6);%delay us
@@ -10,7 +11,7 @@ if (sum(Profile_set>7)|sum(Profile_set<0)|sum(profile_list>7)|sum(profile_list<0
     print('Profile should be 0,1,2....7')
 else
     for count1=1:min([length(freq_set),length(freq_set),length(Profile_set)],8)
-        load_PROF_out(freq_set(count1)*10^6,amp_set(count1),Profile_set(count1));
+        load_PROF_out(freq_set(count1)*10^6,amp_set(count1),Phase_set(count1),Profile_set(count1));
         pause(1)
     end
 % time_set=[1,2,3,4,5,6,7]*50;%delay us
