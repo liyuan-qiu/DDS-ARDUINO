@@ -37,17 +37,17 @@ void setup() {
 //  H = INIT_H;
 //  A = INIT_A;
 //  SingleProfileFreqOut(M*1000000L + K*1000L + H, A*-1);  
-  int Mode_set=1;// 0 is single-tone mode, 1 is profile load mode
+//  int Mode_set=1;// 0 is single-tone mode, 1 is profile load mode
 //  //single tone frequency, amplitude and phase 
 //  uint32_t singe_freq=150;//unit MHz, the max frequency is 600MHz
 //  int single_amp=-40;//unit dBm, amplitude should be -84 to 0 dBm
 //  uint16_t single_phase=0;// phase between 0-360
   //profile 0,1,2.....7 set with frequency and amplitude
   int profile_length=8;//the max profile length is 8, from 0,1,2,....,7
-  uint8_t profile_load[profile_length]={0,1,2,3,4,5,6,7};//profile should be 0,1,2,....,7
-  uint32_t freq_load[profile_length]={300,300,300,300,300,300,300,300};//unit MHz, the max frequency is 600MHz
-  int amp_load[profile_length]={-40,-35,-30,-25,-20,-15,-10,-5};//unit dBm, amplitude should be -84 to 0 dBm
-  uint16_t Phase_load[profile_length]={0,0,0,0,0,0,0,0};//phase between 0-360
+//  uint8_t profile_load[profile_length]={0,1,2,3,4,5,6,7};//profile should be 0,1,2,....,7
+//  uint32_t freq_load[profile_length]={300,300,300,300,300,300,300,300};//unit MHz, the max frequency is 600MHz
+//  int amp_load[profile_length]={-40,-35,-30,-25,-20,-15,-10,-5};//unit dBm, amplitude should be -84 to 0 dBm
+//  uint16_t Phase_load[profile_length]={0,0,0,0,0,0,0,0};//phase between 0-360
   //uint32_t freq_load[profile_length]={100,150,200,250,300,350,400,450};//unit MHz, the max frequency is 600MHz
   //int amp_load[profile_length]={-40,-35,-30,-5,-40,-15,-10,-5};//unit dBm, amplitude should be -84 to 0 dBm
   attachInterrupt(digitalPinToInterrupt(interruptPin), profile_interrupt, RISING);
@@ -116,7 +116,7 @@ void loop() {
       Serial.println(H);
       A=request.substring(request.indexOf("HHz")+3,request.indexOf("dBm")).toInt();
       Serial.println(A);
-      P=request.substring(request.indexOf("dBm")+3,request.indexOf("Phase")).toInt();
+      P=request.substring(request.indexOf("dBm")+3,request.indexOf("Deg")).toInt();
       Serial.println(P);
         //single tone frequency, amplitude and phase 
       uint32_t singe_freq=M*1000000L + K*1000L + H;//unit Hz, the max frequency is 600MHz
